@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 /**
  * Created by user on 25.01.15.
  */
-@WebServlet
+@WebServlet(urlPatterns = {"reg"})
 public class RegistrationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
