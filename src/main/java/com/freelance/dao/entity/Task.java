@@ -1,17 +1,28 @@
 package com.freelance.dao.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by user on 24.01.15.
  */
-public class Task implements Comparable<Task>{
+@Entity
+@Table(name = "Task")
+public class Task implements Comparable<Task> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
+    @Column(name = "description")
     private String description;
+    @Column(name = "deadline")
     private Date deadline;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "freelancer_id")
+    private Freelancer freelancer;
 
     public Task() {
-        description="";
+        description = "";
         deadline = new Date();
     }
 
@@ -44,6 +55,14 @@ public class Task implements Comparable<Task>{
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+    public Freelancer getFreelancer() {
+        return freelancer;
+    }
+
+    public void setFreelancer(Freelancer freelancer) {
+        this.freelancer = freelancer;
     }
 
     @Override

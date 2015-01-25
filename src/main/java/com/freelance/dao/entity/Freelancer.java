@@ -1,15 +1,24 @@
 package com.freelance.dao.entity;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by user on 24.01.15.
  */
+@Entity
+@Table(name = "Freelancer")
 public class Freelancer implements Comparable<Freelancer> {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastname;
+    @OneToMany(mappedBy = "freelancer")
     private List<Task> tasks;
 
     public Freelancer() {
@@ -77,5 +86,14 @@ public class Freelancer implements Comparable<Freelancer> {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Freelancer{" +
+                "lastname='" + lastname + '\'' +
+                ", id=" + id +
+                ", firstName='" + firstName + '\'' +
+                '}';
     }
 }
